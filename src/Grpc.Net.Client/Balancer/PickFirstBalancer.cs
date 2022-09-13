@@ -181,9 +181,9 @@ namespace Grpc.Net.Client.Balancer
             Subchannel = subchannel;
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
-            return PickResult.ForSubchannel(Subchannel);
+            return Task.FromResult(PickResult.ForSubchannel(Subchannel));
         }
     }
 
@@ -193,10 +193,10 @@ namespace Grpc.Net.Client.Balancer
         {
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
             Subchannel.RequestConnection();
-            return base.Pick(context);
+            return base.PickAsync(context);
         }
     }
 

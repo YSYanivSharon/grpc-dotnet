@@ -316,7 +316,7 @@ namespace Grpc.Net.Client.Balancer.Internal
                 var currentPicker = await GetPickerAsync(previousPicker, cancellationToken).ConfigureAwait(false);
 
                 ConnectionManagerLog.PickStarted(Logger);
-                var result = currentPicker.Pick(context);
+                var result = await currentPicker.PickAsync(context).ConfigureAwait(false);
 
                 switch (result.Type)
                 {

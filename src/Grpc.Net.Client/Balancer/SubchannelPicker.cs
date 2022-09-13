@@ -37,7 +37,7 @@ namespace Grpc.Net.Client.Balancer
         /// </summary>
         /// <param name="context">The pick content.</param>
         /// <returns>A ready <see cref="Subchannel"/>.</returns>
-        public abstract PickResult Pick(PickContext context);
+        public abstract Task<PickResult> PickAsync(PickContext context);
     }
 }
 #endif

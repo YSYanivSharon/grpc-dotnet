@@ -63,7 +63,7 @@ namespace Grpc.AspNetCore.FunctionalTests.Balancer
             _subchannels = subchannels.ToList();
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
             Subchannel? leastUsedSubchannel = null;
             int? leastUsedCount = null;
@@ -88,7 +88,7 @@ namespace Grpc.AspNetCore.FunctionalTests.Balancer
             Debug.Assert(leastUsedSubchannel != null);
             Debug.Assert(leastUsedCounter != null);
 
-            return PickResult.ForSubchannel(leastUsedSubchannel, new LeastUsedSubchannelTracker(leastUsedCounter));
+            return Task.FromResult(PickResult.ForSubchannel(leastUsedSubchannel, new LeastUsedSubchannelTracker(leastUsedCounter)));
         }
 
         public override string ToString()

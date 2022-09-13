@@ -30,9 +30,9 @@ namespace Grpc.Net.Client.Balancer.Internal
             _pickResult = PickResult.ForQueue();
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
-            return _pickResult;
+            return Task.FromResult(_pickResult);
         }
     }
 }

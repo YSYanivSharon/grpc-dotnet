@@ -33,9 +33,9 @@ namespace Grpc.Net.Client.Balancer.Internal
             _status = status;
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
-            return PickResult.ForFailure(_status);
+            return Task.FromResult(PickResult.ForFailure(_status));
         }
     }
 }

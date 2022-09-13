@@ -73,13 +73,13 @@ namespace Grpc.Net.Client.Balancer
             _pickCount = pickCount;
         }
 
-        public override PickResult Pick(PickContext context)
+        public override Task<PickResult> PickAsync(PickContext context)
         {
             var c = Interlocked.Increment(ref _pickCount);
             var index = c % _subchannels.Count;
             var item = _subchannels[(int)index];
 
-            return PickResult.ForSubchannel(item);
+            return Task.FromResult(PickResult.ForSubchannel(item));
         }
 
         public override string ToString()

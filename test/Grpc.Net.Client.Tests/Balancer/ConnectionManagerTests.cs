@@ -520,10 +520,10 @@ namespace Grpc.Net.Client.Tests.Balancer
                     _loadBalancer = loadBalancer;
                 }
 
-                public override PickResult Pick(PickContext context)
+                public override Task<PickResult> PickAsync(PickContext context)
                 {
                     _loadBalancer.PickCount++;
-                    return PickResult.ForDrop(new Status(StatusCode.DataLoss, string.Empty));
+                    return Task.FromResult(PickResult.ForDrop(new Status(StatusCode.DataLoss, string.Empty)));
                 }
             }
         }
